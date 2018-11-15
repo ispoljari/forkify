@@ -1,7 +1,9 @@
 // API Key: 452bd0b5e11b1a34c11e392ab1d170c4 
 // URL endpoint: https://www.food2fork.com/api/search
 
-import Search from '../js/models/model.search';
+import Search from './models/model.search';
+import * as searchView from './views/view.search'
+import {elements} from './views/view.base';
 
 /* Global state of the app
  * - Search Object
@@ -13,8 +15,7 @@ import Search from '../js/models/model.search';
 const state = {};
 
 // Event listeners
-const searchField = document.querySelector('.search');
-searchField.addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', e => {
   e.preventDefault();
   controlSearch();
 });
