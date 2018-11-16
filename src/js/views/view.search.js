@@ -1,7 +1,25 @@
-import {elements} from './views/view.base';
+import {elements} from './view.base';
 
 // 1) Read the data from the form input field
+export const getInput = () => elements.searchInput.value;
 
-export const getInput = () => {
-  return 
+// 2) Render results
+export const renderResults = recipes => {
+  recipes.forEach(renderRecipe);
+}
+
+// 2.1 Render individual recipe
+const renderRecipe = recipe => {
+  const markup = 
+    `<li>
+      <a class="results__link results__link--active" href="${recipe.recipe_id}">
+        <figure class="results__fig">
+          <img src="${recipe.image_url}" alt="${recipe.title}">
+        </figure>
+        <div class="results__data">
+          <h4 class="results__name">${recipe.title}</h4>
+          <p class="results__author">${recipe.publisher}</p>
+        </div>
+      </a>
+    </li>`;
 }

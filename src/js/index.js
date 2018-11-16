@@ -26,7 +26,7 @@ elements.searchForm.addEventListener('submit', e => {
 async function controlSearch() {
   // TODO:
   // 1) Get the query from the view controller
-  const query = 'cookie' //
+  const query = searchView.getInput(); //
 
   // 2) If there is a query create a search object and add it to state
   if (query) {
