@@ -13,6 +13,14 @@ export const clearInput = () => {
   elements.searchInput.value = '';
 }
 
+// 4) Clear the previous results from the HTML (DOM)
+export const clearResults = () => {
+  while(elements.searchResList.firstChild) {
+    elements.searchResList.removeChild(elements.searchResList.firstChild);
+  }
+  // OR (slower variant) elements.searchResList.innerHTML = '';
+}
+
 // 2.1 Render individual recipe
 function renderRecipe(recipe) {
   const markup = 
