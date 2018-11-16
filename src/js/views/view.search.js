@@ -8,11 +8,16 @@ export const renderResults = recipes => {
   recipes.forEach(renderRecipe);
 }
 
+// 3) Clear text from input field
+export const clearInput = () => {
+  elements.searchInput.value = '';
+}
+
 // 2.1 Render individual recipe
-const renderRecipe = recipe => {
+function renderRecipe(recipe) {
   const markup = 
     `<li>
-      <a class="results__link results__link--active" href="${recipe.recipe_id}">
+      <a class="results__link" href="${recipe.recipe_id}">
         <figure class="results__fig">
           <img src="${recipe.image_url}" alt="${recipe.title}">
         </figure>
@@ -22,4 +27,6 @@ const renderRecipe = recipe => {
         </div>
       </a>
     </li>`;
+
+  elements.searchResList.insertAdjacentHTML('beforeend', markup);
 }

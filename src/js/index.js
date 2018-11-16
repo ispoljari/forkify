@@ -34,10 +34,11 @@ async function controlSearch() {
   }
 
   // 3) Prepare UI for results
+  searchView.clearInput();
 
   // 4) Search for recipes
   await state.search.getResults();
 
   // 5) Render results on UI
-  console.log(state.search.result);
+  searchView.renderResults(state.search.result);
 }
