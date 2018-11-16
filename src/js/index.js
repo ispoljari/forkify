@@ -25,9 +25,6 @@ elements.searchForm.addEventListener('submit', e => {
 // FN's inside event listeners
 async function controlSearch() {
   // TODO:
-  // 0) Clear old results from the screen
-  searchView.clearResults();
-
   // 1) Get the query from the view controller
   const query = searchView.getInput(); //
 
@@ -38,6 +35,7 @@ async function controlSearch() {
 
   // 3) Prepare UI for results
   searchView.clearInput();
+  searchView.clearResults();
 
   // 4) Search for recipes
   await state.search.getResults();
