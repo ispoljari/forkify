@@ -2,6 +2,7 @@
 // URL endpoint: https://www.food2fork.com/api/search
 
 import Search from './models/model.search';
+import Recipe from './models/model.recipe'
 import * as searchView from './views/view.search'
 import {elements, renderLoader, clearLoader} from './views/view.base';
 
@@ -13,6 +14,9 @@ import {elements, renderLoader, clearLoader} from './views/view.base';
 */
 
 const state = {};
+
+/* ------- SEARCH CONTROLLER ------- */
+/* --------------------------------- */
 
 // Event listeners
 elements.searchForm.addEventListener('submit', e => {
@@ -57,3 +61,10 @@ async function controlSearch() {
   // 5) Render results on UI
   searchView.renderResults(state.search.result);
 }
+
+/* ------- RECIPE CONTROLLER ------- */
+/* --------------------------------- */
+
+const recipe = new Recipe(47746);
+recipe.getRecipe();
+console.log(recipe);
