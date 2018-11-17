@@ -4,8 +4,12 @@ import {elements} from './view.base';
 export const getInput = () => elements.searchInput.value;
 
 // 2) Render results
-export const renderResults = recipes => {
-  recipes.forEach(renderRecipe);
+export const renderResults = (recipes, page = 1, resPerPage = 10) => {
+  
+  const start = (page - 1)*resPerPage;
+  const end = resPerPage*page;
+  
+  recipes.slice(start, end).forEach(renderRecipe);
 }
 
 // 3) Clear text from input field
@@ -52,3 +56,25 @@ function limitRecipeTitle(title, limit = 17) {
   }
   return title;
 }
+
+function renderButtons(page, numResults, resPerPage) {
+  const pages = Math.ceil(numResults/resPerPage);
+
+  if (page === 1 && pages > 1) {
+    // Only button go to next page
+  } else if (page === pages && pages > 1) {
+    // Only button go to previous page 
+  } else if (page < pages) {
+    // Both buttons 
+  }
+}
+
+function createButton(page, type) {
+  return `
+    <button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
+      <svg class="search__icon">
+        <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
+      </svg>
+      <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
+    </button>`
+} 
