@@ -10,6 +10,7 @@ export const renderResults = (recipes, page = 1, resPerPage = 10) => {
   const end = resPerPage*page;
   
   recipes.slice(start, end).forEach(renderRecipe);
+  renderButtons(page, recipes.length, resPerPage);
 }
 
 // 3) Clear text from input field
@@ -23,6 +24,7 @@ export const clearResults = () => {
     elements.searchResList.removeChild(elements.searchResList.firstChild);
   }
   // OR (slower variant) elements.searchResList.innerHTML = '';
+  elements.resultsPages.innerHTML = '';
 }
 
 // 2.1 Render individual recipe
@@ -59,14 +61,23 @@ function limitRecipeTitle(title, limit = 17) {
 
 function renderButtons(page, numResults, resPerPage) {
   const pages = Math.ceil(numResults/resPerPage);
+  let button;
 
   if (page === 1 && pages > 1) {
     // Only button go to next page
+    button = createButton(page, 'next');
   } else if (page === pages && pages > 1) {
     // Only button go to previous page 
+    button = createButton(page, 'prev');
   } else if (page < pages) {
     // Both buttons 
+    button = `
+      ${createButton(page, 'prev')}
+      ${createButton(page, 'next')}
+    `;
   }
+
+  elements.resultsPages.insertAdjacentHTML('afterbegin', button);
 }
 
 function createButton(page, type) {

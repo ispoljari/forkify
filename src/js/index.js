@@ -20,6 +20,16 @@ elements.searchForm.addEventListener('submit', e => {
   controlSearch();
 });
 
+elements.resultsPages.addEventListener('click', e => {
+  const btn = e.target.closest('.btn-inline');
+  if (btn) {
+    const goToPage = parseInt(btn.dataset.goto, 10);
+
+    searchView.clearResults();
+    searchView.renderResults(state.search.result, goToPage);
+  }
+});
+
 // Function implementations
 
 // FN's inside event listeners
