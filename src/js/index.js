@@ -42,7 +42,7 @@ async function controlSearch() {
   await state.search.getResults();
 
   // 4.1) Remove loader spinner
-  await clearLoader(elements.searchRes);
+  clearLoader(elements.searchRes);
 
   // 5) Render results on UI
   searchView.renderResults(state.search.result);
