@@ -3,7 +3,7 @@
 
 import Search from './models/model.search';
 import * as searchView from './views/view.search'
-import {elements} from './views/view.base';
+import {elements, renderLoader, clearLoader} from './views/view.base';
 
 /* Global state of the app
  * - Search Object
@@ -36,9 +36,13 @@ async function controlSearch() {
   // 3) Prepare UI for results
   searchView.clearInput();
   searchView.clearResults();
+  renderLoader(elements.searchRes);
 
   // 4) Search for recipes
   await state.search.getResults();
+
+  // 4.1) Remove loader spinner
+  await clearLoader(elements.searchRes);
 
   // 5) Render results on UI
   searchView.renderResults(state.search.result);
