@@ -44,21 +44,25 @@ async function controlSearch() {
   // 2) If there is a query create a search object and add it to state
   if (query) {
     state.search = new Search(query);
+  
+    // 3) Prepare UI for results
+    searchView.clearInput();
+    searchView.clearResults();
+    renderLoader(elements.searchRes);
+
+    try {
+      // 4) Search for recipes
+      await state.search.getResults();
+  
+      // 4.1) Remove loader spinner
+      clearLoader(elements.searchRes);
+  
+      // 5) Render results on UI
+      searchView.renderResults(state.search.result);
+    } catch (error) {
+      console.log('Something went wrong in fetching the results!');
+    }
   }
-
-  // 3) Prepare UI for results
-  searchView.clearInput();
-  searchView.clearResults();
-  renderLoader(elements.searchRes);
-
-  // 4) Search for recipes
-  await state.search.getResults();
-
-  // 4.1) Remove loader spinner
-  clearLoader(elements.searchRes);
-
-  // 5) Render results on UI
-  searchView.renderResults(state.search.result);
 }
 
 /* ------- RECIPE CONTROLLER ------- */
