@@ -64,7 +64,9 @@ async function controlSearch() {
 /* ------- RECIPE CONTROLLER ------- */
 /* --------------------------------- */
 
-window.addEventListener('hashchange', controlRecipe);
+['hashchange', 'load'].forEach(event => {
+  window.addEventListener(event, controlRecipe);
+});
 
 async function controlRecipe() {
   const id = window.location.hash.replace('#','');
@@ -76,15 +78,19 @@ async function controlRecipe() {
     // Create new recipe object
     state.recipe = new Recipe(id);
     
-    // Get recipe data
-    await state.recipe.getRecipe();
-
-    // Calculate servings and time
-    state.recipe.calcTime();
-    state.recipe.calcServings();
-
-    // Render the recipe
-    console.log(state.recipe);
+    try {
+      // Get recipe data
+      await state.recipe.getRecipe();
+  
+      // Calculate servings and time
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+  
+      // Render the recipe
+      console.log(state.recipe); 
+    } catch (error) {
+      console.log('Something went wrong in fetching the recipe!');
+    }
   }
 }
 
