@@ -38,7 +38,6 @@ elements.resultsPages.addEventListener('click', e => {
 
 // FN's inside event listeners
 async function controlSearch() {
-  // TODO:
   // 1) Get the query from the view controller
   const query = searchView.getInput(); //
 
@@ -65,6 +64,29 @@ async function controlSearch() {
 /* ------- RECIPE CONTROLLER ------- */
 /* --------------------------------- */
 
-const recipe = new Recipe(47746);
-recipe.getRecipe();
-console.log(recipe);
+window.addEventListener('hashchange', controlRecipe);
+
+async function controlRecipe() {
+  const id = window.location.hash.replace('#','');
+
+  if (id) {
+    // TODO:
+    // Prepare UI for changes
+
+    // Create new recipe object
+    state.recipe = new Recipe(id);
+    
+    // Get recipe data
+    await state.recipe.getRecipe();
+
+    // Calculate servings and time
+    state.recipe.calcTime();
+    state.recipe.calcServings();
+
+    // Render the recipe
+    console.log(state.recipe);
+  }
+}
+
+// recipe.getRecipe();
+// console.log(recipe);
