@@ -60,7 +60,7 @@ async function controlSearch() {
       // 5) Render results on UI
       searchView.renderResults(state.search.result);
     } catch (error) {
-      console.log('Something went wrong in fetching the results!');
+      console.log(error);
     }
   }
 }
@@ -85,7 +85,8 @@ async function controlRecipe() {
     try {
       // Get recipe data
       await state.recipe.getRecipe();
-  
+      state.recipe.parseIngredients();
+
       // Calculate servings and time
       state.recipe.calcTime();
       state.recipe.calcServings();
@@ -93,7 +94,7 @@ async function controlRecipe() {
       // Render the recipe
       console.log(state.recipe); 
     } catch (error) {
-      console.log('Something went wrong in fetching the recipe!');
+      console.log(`Something went wrong in fetching the recipe! Event object: ${error}`);
     }
   }
 }
